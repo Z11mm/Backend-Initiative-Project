@@ -1,4 +1,4 @@
-from flask import Flask, request
+from flask import Flask, request, render_template
 import json
 from users_db import users_db
 from movies_db import movies_db
@@ -6,20 +6,27 @@ from rentals_db import rentals_db
 
 app = Flask(__name__)
 
-
 @app.route('/')
-def hello_world():
-  return 'hello world'
+def homepage():
+  return render_template('index.html')
 
-# users
+# USERS
+# get all users
 @app.route('/users', methods=['GET'])
 def get_users():
   users = json.dumps(users_db)
   return users
 
-# @app.route('/profile/<id>', methods=['GET'])
-# def get_user(id):
-
+# signup user
+@app.route('/signup', methods=['POST', 'GET'])
+def add_user():
+  if request.method == 'POST':
+    username = request.form['name']
+    email = request.form['email']
+    password = request.form['password']
+  else:
+    return render_template('signup.html')
+    
 # movies
 @app.route('/movies', methods=['GET'])
 def get_movies():
