@@ -1,37 +1,36 @@
-from flask import Flask
-# from flask_restful import Api, Resource
+from flask import Flask,request
+from datetime import date
 
 app = Flask(__name__)
-# api = Api(app)
 
-# class User(Resource):
-#   def get(self, user_id):
-#     return {user_id: users[user_id]}
 
-#   def post(self, user_id):
-#     users[user_id] = request.form['data']
-#     return {user_id: users[user_id]},201
-
-# api.add_resource(User, '/users/<string:user_id>')
-
-# @app.route('/')
-# def hello_world():
-#   return 'hello world'
+@app.route('/')
+def hello_world():
+  return 'hello world'
 
 # users
-# @app.route('/users')
-# def users():
-#   return 'Welcome back'
+@app.route('/users', methods=['GET'])
+def users():
+  users = [
+    {
+      'name': "Oma",
+      'age': 24,
+      'gender': 'female',
+      'rentals': 0,
+      'date joined': date.today().strftime('%B %d, %Y')
+    },
+    {
+      'name': "Tunde",
+      'age': 33,
+      'gender': 'male',
+      'rentals': 0,
+      'date joined': date.today().strftime('%B %d, %Y')
+    }
+  ]
+  return {"users": users}
 
-# movies
-# @app.route('/movies')
-# def movies():
-#   return 'Categories'
-
-# rentals
-# @app.route('/rentals')
-# def rentals():
-#   return 'Rent a movie'
+# @app.route('/profile/<id>', methods=['GET'])
+# def get_user(id):
 
 if __name__ == '__main__':
   app.run(debug=True)
