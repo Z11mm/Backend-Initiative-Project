@@ -32,7 +32,12 @@ def add_user():
 @app.route('/login', methods=['POST'])
 def login_user():
   user_credentials = request.get_json()
-  return render_template('success.html')
+  
+  for client in users_db["users"]:
+    if (users_db["users"][0]["email"] == user_credentials["email"] and users_db["users"][0]["password"] == user_credentials["password"]):
+      return render_template('success.html')
+    else:
+      return render_template('index.html')
 
 # movies
 # get all movies
