@@ -18,22 +18,26 @@ def get_users():
   return users
 
 # signup user
-@app.route('/signup', methods=['POST', 'GET'])
+@app.route('/signup', methods=['POST'])
 def add_user():
-  if request.method == 'POST':
-    username = request.form['name']
-    email = request.form['email']
-    password = request.form['password']
-  else:
-    return render_template('signup.html')
-    
+  new_user = request.get_json()   
+  return new_user
+  
+# login user
+@app.route('/login', methods=['POST'])
+def login_user():
+  user_credentials = request.get_json()
+  return user_credentials
+
 # movies
+# get all movies
 @app.route('/movies', methods=['GET'])
 def get_movies():
   movies = json.dumps(movies_db)
   return movies
 
 # rentals
+# get all rentals
 @app.route('/rentals', methods=['GET'])
 def get_rentals():
   rentals = json.dumps(rentals_db)

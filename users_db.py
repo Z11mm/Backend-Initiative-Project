@@ -4,16 +4,14 @@ users_db = {
   "users": [
     {
       "name": "Oma",
-      "age": 24,
-      "gender": "female",
-      "rentals": 0,
+      "email": "oma@yahoo.com",
+      "password": "jgoeoajg",
       "date joined": date.today().strftime("%B %d, %Y")
     },
     {
       "name": "Tunde",
-      "age": 33,
-      "gender": "male",
-      "rentals": 0,
+      "email": "tunde@yahoo.com",
+      "password": "8598464g",
       "date joined": date.today().strftime("%B %d, %Y")
     }
   ]
