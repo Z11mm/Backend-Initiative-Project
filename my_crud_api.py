@@ -1,4 +1,4 @@
-from flask import Flask, request, render_template
+from flask import Flask,request,render_template
 import json
 from users_db import users_db
 from movies_db import movies_db
@@ -18,16 +18,21 @@ def get_users():
   return users
 
 # signup user
-@app.route('/signup', methods=['POST'])
+@app.route('/signup', methods=['GET','POST'])
 def add_user():
-  new_user = request.get_json()   
-  return new_user
+  users = json.dumps(users_db)
+  if request.method == 'POST':
+    new_user = request.get_json()
+    users_db["users"].append(new_user)
+    return new_user
+  else:
+    return render_template('signup.html')
   
 # login user
 @app.route('/login', methods=['POST'])
 def login_user():
   user_credentials = request.get_json()
-  return user_credentials
+  return render_template('success.html')
 
 # movies
 # get all movies
