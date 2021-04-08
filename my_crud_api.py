@@ -32,10 +32,19 @@ def add_user():
 @app.route('/login', methods=['POST'])
 def login_user():
   user_credentials = request.get_json()
-  
+
   for client in users_db["users"]:
     if (users_db["users"][0]["email"] == user_credentials["email"] and users_db["users"][0]["password"] == user_credentials["password"]):
       return render_template('success.html')
+    else:
+      return render_template('index.html')
+
+# get a user
+@app.route('/profile/<int:id>', methods=['GET'])
+def get_user(id):
+  for client in users_db["users"]:
+    if (users_db["users"][0]["id"] == id):
+      return users_db["users"][0]
     else:
       return render_template('index.html')
 
