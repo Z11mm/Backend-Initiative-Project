@@ -40,9 +40,9 @@ def login_user():
 # get a user
 @app.route('/profile/<int:id>', methods=['GET'])
 def get_user(id):
-  for client in users_db["users"]:
-    if (users_db["users"][0]["id"] == id):
-      return users_db["users"][0]
+  for user in users:
+    if (users[1]["id"] == id):
+      return users[1]
     else:
       return render_template('index.html')
 
