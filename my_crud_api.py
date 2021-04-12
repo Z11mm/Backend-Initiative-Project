@@ -1,6 +1,6 @@
 from flask import Flask,request,render_template,jsonify
 import json
-from users_db import users_db
+from users_db import users
 from movies_db import movies
 from rentals_db import rentals
 
@@ -14,16 +14,14 @@ def homepage():
 # get all users
 @app.route('/users', methods=['GET'])
 def get_users():
-  users = json.dumps(users_db)
-  return users
+  return jsonify(users)
 
 # signup user
 @app.route('/signup', methods=['GET','POST'])
 def add_user():
-  users = json.dumps(users_db)
   if request.method == 'POST':
     new_user = request.get_json()
-    users_db["users"].append(new_user)
+    users.append(new_user)
     return new_user
   else:
     return render_template('signup.html')
@@ -33,8 +31,8 @@ def add_user():
 def login_user():
   user_credentials = request.get_json()
 
-  for client in users_db["users"]:
-    if (users_db["users"][0]["email"] == user_credentials["email"] and users_db["users"][0]["password"] == user_credentials["password"]):
+  for user in users:
+    if (users[2]["email"] == user_credentials["email"] and users[2]["password"] == user_credentials["password"]):
       return render_template('success.html')
     else:
       return render_template('index.html')
