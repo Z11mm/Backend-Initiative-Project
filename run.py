@@ -1,3 +1,4 @@
+# Run app on flask server
 from src import create_app
 
 myapp = create_app()
