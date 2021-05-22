@@ -4,5 +4,8 @@ homepage = Blueprint('views', __name__, url_prefix='/', template_folder='templat
 
 @homepage.route('/')
 def home():
-    print('working')
     return render_template('index.html')
+
+@homepage.route('/signup')
+def add_user():
+    return render_template('signup.html')
