@@ -9,3 +9,7 @@ def home():
 @homepage.route('/signup')
 def add_user():
     return render_template('signup.html')
+
+@homepage.route('/signin')
+def login_user():
+    return render_template('signin.html')
