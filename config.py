@@ -1,6 +1,4 @@
 # Flask configuration variables
-
-from logging import DEBUG
 from os import environ, path
 from dotenv import load_dotenv
 
