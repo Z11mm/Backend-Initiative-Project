@@ -14,7 +14,9 @@ def create_app():
         # import routes
         from .home import views
 
+        db.create_all()
+
         # register blueprints
         app.register_blueprint(views.homepage)
 
-    return app
+        return app
