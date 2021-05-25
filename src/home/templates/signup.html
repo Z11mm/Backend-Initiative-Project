@@ -5,7 +5,7 @@
 {% endblock %}
 
 {% block body %}
-<form action="/http://localhost:5000/adduser" method="POST">
+<form action="/signup" method="POST">
     <label for="username">Username</label><br>
     <input type="text" id="username" name="username" placeholder="Username"><br>
     <label for="email">Email</label><br>
@@ -14,8 +14,9 @@
     <input type="password" id="password" name="password" placeholder="Password"><br><br>
     <input type="submit" value="Sign Up">
 </form> 
-{% endblock %}
 
 {% for user in users %}
 <p>{{ user.username }}</p>
+{% endfor %}
+
 {% endblock %}

@@ -9,7 +9,7 @@ homepage = Blueprint('views', __name__, url_prefix='/', template_folder='templat
 def home():
     return render_template('index.html')
 
-@homepage.route('/adduser', methods=['GET', 'POST'])
+@homepage.route('/signup', methods=['GET', 'POST'])
 def add_user():
     if request.method == 'POST':
         username_input = request.form['username']
