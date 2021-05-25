@@ -1,7 +1,8 @@
-from flask import Blueprint,render_template,request,redirect
+from flask import Blueprint,render_template,redirect, url_for
 from datetime import datetime as dt
 
 from ..models import db, User
+from ..forms import SignupForm
 
 homepage = Blueprint('views', __name__, url_prefix='/', template_folder='templates', static_folder='static')
 
@@ -11,10 +12,11 @@ def home():
 
 @homepage.route('/signup', methods=['GET', 'POST'])
 def add_user():
-    if request.method == 'POST':
-        username_input = request.form['username']
-        email_input = request.form['email']
-        password_input = request.form['password']
+    form = SignupForm()
+    if form.validate_on_submit():
+        username_input = form.username.data
+        email_input = form.email.data
+        password_input = form.password.data
 
         new_user = User(
             username = username_input,
@@ -26,12 +28,12 @@ def add_user():
         try:
             db.session.add(new_user)
             db.session.commit()
-            return redirect('/')
+            return redirect(url_for('home'))
         except:
             return 'There was an issue adding new user'
     else:
         users = User.query.order_by(User.date_joined).all()
-        return render_template('signup.html', users=users)
+        return render_template('signup.html', users=users, form=form)
 
 @homepage.route('/signin')
 def login_user():
