@@ -1,5 +1,8 @@
-from flask import Blueprint,render_template,redirect, url_for
+# Handle views for the homepage
+from flask import Blueprint,render_template,redirect, url_for, request
 from datetime import datetime as dt
+
+from flask.globals import request
 
 from ..models import db, User
 from ..forms import SignupForm
@@ -13,7 +16,8 @@ def home():
 @homepage.route('/signup', methods=['GET', 'POST'])
 def add_user():
     form = SignupForm()
-    if form.validate_on_submit():
+
+    if request.method == 'POST' and form.validate_on_submit():
         username_input = form.username.data
         email_input = form.email.data
         password_input = form.password.data
@@ -28,7 +32,7 @@ def add_user():
         try:
             db.session.add(new_user)
             db.session.commit()
-            return redirect(url_for('home'))
+            return redirect('/')
         except:
             return 'There was an issue adding new user'
     else:
