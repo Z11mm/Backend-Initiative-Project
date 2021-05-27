@@ -16,4 +16,15 @@ class SignupForm(FlaskForm):
         Length(min=8),
         EqualTo('confirm', message='Passwords must match')])
     confirm = PasswordField(u'Confirm Password', [DataRequired()])
-    submit = SubmitField(u'Submit')
+    submit = SubmitField(u'Sign Up')
+
+class SigninForm(FlaskForm):
+    email = StringField(
+        u'Email',
+        [DataRequired(),
+        Email(message='Not a valid email address.'),
+        Unique(User, User.email, message='This email address does not exist.')])
+    password = PasswordField(
+        u'Password',
+        [DataRequired(message='Please enter your password.')])
+    submit = SubmitField(u'Sign In')

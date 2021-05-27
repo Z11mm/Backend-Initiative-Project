@@ -1,6 +1,10 @@
 from datetime import datetime
 from . import db
+from flask_login import UserMixin
+from flask_bcrypt import Bcrypt
+from flask import current_app
 
+pw_bcrypt = Bcrypt(current_app)
 class User(db.Model):
     """Data model for user accounts"""
 
